@@ -31,37 +31,15 @@ def Permutate(values,leng):
         return values
     permList = []
     for i in values:
-        #test = values.remove(i)
         remaining_elements = [x for x in values if x != i]
         z = Permutate(remaining_elements,leng)
         for t in z:
             permList.append([i] + [t])
+
     return permList
     
 
-perms = Permutate([1,2,9,4],2)
+perms = Permutate([1,2,9,4],1)
+
 print(perms)
-
-#perm2([1,2,3,4],2)
-#print(tempList)
-
-
-
-
-
-
-
-
-def CreatePermutations(perms, values, maxLen):
-    perms = []
-    tempList = []
-    for i in values:
-        perms.append(i)
-    for i in values:
-        for j in values:
-            if i != j:
-                tempList.append(i)
-                perms.append(tempList)
-
-    return perms
 
