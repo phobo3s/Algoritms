@@ -16,28 +16,34 @@ def FindWay(G,i,j):
     perms = CreatePermutations(perms, betweenValues, maxPermLen)
     print(perms)
 
-perms = []
-tempList = []
 
-def addperm(values,tempList):
-    a = 0
-    for i in tempList:
-        for q in range(len(values)):
-            j = values[a]
-            a += 1
-            i.append(j)
+def PermCount(values,leng):
+    leng -= 1
+    a = len(values) -leng 
+    if leng != 0:
+        pc = a * PermCount(values, leng)
+    else:
+        pc = len(values)
+    return pc
 
-def perm2(values,leng):
+def Permutate(values,leng):
+    if len(values) == leng+1:
+        return values
+    permList = []
     for i in values:
-        for j in range(len(values)):
-            tempList.append([i])
-    for i in range(leng-1):
-        addperm(values,tempList)
+        #test = values.remove(i)
+        remaining_elements = [x for x in values if x != i]
+        z = Permutate(remaining_elements,leng)
+        for t in z:
+            permList.append([i] + [t])
+    return permList
+    
 
-    return tempList
+perms = Permutate([1,2,9,4],2)
+print(perms)
 
-perm2([1,2,3,4],2)
-print(tempList)
+#perm2([1,2,3,4],2)
+#print(tempList)
 
 
 
