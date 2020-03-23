@@ -11,11 +11,12 @@ def FindWay(G,i,j):
         betweenValues.append(a)
     betweenValues.remove(i)
     betweenValues.remove(j)
-    print(betweenValues)
-    maxPermLen = len(betweenValues)
     perms = []
-    perms = CreatePermutations(perms, betweenValues, maxPermLen)
-    print(perms)
+    for i in range(len(G)-2):
+        perms = Permutate(betweenValues, i+1)
+        #for j in perms:
+        #for a in range(len(j)):
+        print(perms)
 
 
 def PermCount(values,leng):
@@ -28,19 +29,17 @@ def PermCount(values,leng):
     return pc
 
 def Permutate(values,leng):
-    if len(values) == leng+1:
-        return values
+    if leng == 1:
+        templist =[]
+        for a in values:
+            templist.append([a])
+        return templist
     permList = []
     for i in values:
         remaining_elements = [x for x in values if x != i]
-        z = Permutate(remaining_elements,leng)
+        z = Permutate(remaining_elements,leng-1)
         for t in z:
-            permList.append([i] + [t])
-
+            permList.append([i] + t)
     return permList
-    
 
-perms = Permutate([1,2,9,4],1)
-
-print(perms)
-
+print(FindWay(G,1,3))
