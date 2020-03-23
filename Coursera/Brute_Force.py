@@ -1,3 +1,4 @@
+# Graph Matrix
 G = [[0,1,0,0],[0,0,1,0],[0,0,0,1],[0,0,0,0]]
 
 def PrintGraph(G):
