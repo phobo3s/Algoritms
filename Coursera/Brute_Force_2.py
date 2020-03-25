@@ -1,5 +1,5 @@
 # Graph Matrix
-G = [[0,1,0,1,0],[0,0,1,0,0],[0,0,0,1,1],[0,0,0,0,0]]
+G = [[0,1,0,1,0],[0,0,1,0,0],[0,0,0,1,1],[0,0,0,0,0],[0,0,0,0,0]]
 
 def PrintGraph(G):
     for i in G:
@@ -37,18 +37,23 @@ def FindWay(G,i,j):
                 if isthereaway:
                     print(20*"-")
                     print("There is {} leng connection between {} and {}.".format(k+1,i,j), flush= True)
+                    print("The Way is : {}".format(theWay),flush = True)
                     print(20*"-")
                     break
                 else:
                     pass
+            if isthereaway:
+                print(20*"*")
+                print("The Way Found...")
+                print(20*"-")
+                break
+            else:
+                pass
         if isthereaway == False:
-            print(20*"-")
-            print("There is no way between {} and {}.".format(i,j), flush= True)
-            print(20*"-")
-        else:
             print(20*"*")
-            print("The Way Found...")
+            print("NO Way Found...")
             print(20*"-")
+                
 
 def Permutate(values,leng):
     if leng == 1:
