@@ -1,3 +1,6 @@
+import os
+import time
+
 # Graph Matrix
 G = [[0,1,0,1,0],[0,0,1,0,0],[0,0,0,1,1],[0,0,0,0,0]]
 
@@ -5,12 +8,9 @@ def PrintGraph(G):
     for i in G:
         print(i)
     
-def FindWay(G,i,j):
-    
+def FindWay(G,i,j):  
     betweenValues = [x for x in range(len(G)) if x != i and x != j]
-    
     #print(betweenValues)
-    
     # Is there Direct Connection?
     if G[i][j] == 1:
         print(20*"-")
@@ -37,17 +37,21 @@ def FindWay(G,i,j):
                 if isthereaway:
                     print(20*"-")
                     print("There is {} leng connection between {} and {}.".format(k+1,i,j), flush= True)
+                    print("The Way is : {}".format(theWay),flush = True)
                     print(20*"-")
                     break
                 else:
                     pass
+            if isthereaway:
+                print(20*"*")
+                print("The Way Found...")
+                print(20*"-")
+                break
+            else:
+                pass
         if isthereaway == False:
-            print(20*"-")
-            print("There is no way between {} and {}.".format(i,j), flush= True)
-            print(20*"-")
-        else:
             print(20*"*")
-            print("The Way Found...")
+            print("NO Way Found...")
             print(20*"-")
 
 def Permutate(values,leng):
@@ -64,10 +68,36 @@ def Permutate(values,leng):
             permList.append([i] + t)
     return permList
 
+def Menu():
+    print(50*"=")
+    print("[1] - Bir noktadan diğerine yol bul...")
+    print("[2] - Bir noktanın derecesini bul...")
+    print("[3] - Küçük Dünya mı?")
+    print("")
+    print("[0] - Çıkış...")
+    selection = input("Lütfen Seçiminizi Yapınız... \n")
+    return selection
+    
 def Main():
-    startNode = int(input("Başlangıç Noktasını Giriniz...\n"))
-    endNode = int(input("Bitiş Noktasını Giriniz...\n"))
-    FindWay(G,startNode,endNode)
+    while True:
+        os.system("cls")
+        selection = Menu()
+        if selection == "1":
+            startNode = int(input("Başlangıç Noktasını Giriniz...\n"))
+            endNode = int(input("Bitiş Noktasını Giriniz...\n"))
+            FindWay(G,startNode,endNode)
+            input("Geri Dönmek İçin 'enter'a Basınız...\n")
+        elif selection == "2":
+            pass
+        elif selection == "0":
+            print("Hoşçakal")
+            time.sleep(2)
+            os.system("cls")
+            break
+        else:
+            print("Hatalı seçim yaptınız lütfen tekrar deneyiniz...")
+
+        
 
 if __name__ == "__main__":
     Main()
