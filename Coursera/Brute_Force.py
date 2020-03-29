@@ -39,17 +39,23 @@ def ReadGraphFromFile(name):
 def WriteGraphToFile(G,name):
     workingDir = os.getcwd() + "\\"   
     file = open(workingDir + name, "w")
-    
-    file.write()
-
-
-
-
+    write_str = ""
+    for i, subG in enumerate(G):
+        for j, val in enumerate(subG):
+            if val == 1:
+                write_str += str(i) + " " + str(j) + "\n"
+    #write_str += "\n"
+    print(write_str)
+    file.write(write_str)
     file.close()
 
 def PrintGraph(G):
-    for i in G:
-        print(i)
+    for i,subG in enumerate(G):
+        print(i,end=" || ")
+        for j,val in enumerate(subG):
+            print(val,end=" | ")
+        print()
+        print(len(G)*5*"-")
     input("Geri Dönmek İçin 'enter'a Basınız...\n")
     
 def FindWay(G,i,j):  
@@ -114,30 +120,51 @@ def Permutate(values,leng):
 
 def Menu():
     print(50*"=")
-    print("[1] - Dosyadan Graph Bilgilerini Al")
-    print("[2] - 1")
-    print("[3] - Bir noktadan diğerine yol bul...")
-    print("[4] - Bir noktanın derecesini bul...")
-    print("[5] - Küçük Dünya mı?")
+    print("[1] - Grafiği Görüntüle")
+    print("[2] - Dosyadan Graph Bilgilerini Al")
+    print("[3] - Graph Bilgilerini Text Dosyasına Yaz")
+    print("[4] - Bir noktadan diğerine yol bul...")
+    print("[5] - Bir noktanın derecesini bul...")
+    print("[6] - Küçük Dünya mı?")
     print("")
     print("[0] - Çıkış...")
     selection = input("Lütfen Seçiminizi Yapınız... \n")
     return selection
     
 def Main():
+    G = []
     while True:
         os.system("cls")
         selection = Menu()
+        os.system("cls")
         if selection == "1":
-            G = ReadGraphFromFile("gr1.txt")
-            PrintGraph(G)
+            if G == []:
+                print("Graph BOŞ")
+                input("Geri Dönmek İçin 'enter'a Basınız...\n")
+            else:
+                PrintGraph(G)
+        elif selection == "2":
+            os.system("dir")
+            fileName = input("Veri Alınacak Dosya İsmi Giriniz\n")
+            if fileName != "":
+                G = ReadGraphFromFile(fileName)
+            else:
+                print("Lütfen Dosya Adı Veriniz")
+                input("Geri Dönmek İçin 'enter'a Basınız...\n")
         elif selection == "3":
+            fileName = input("Yazılacak Dosya İsmi Giriniz\n")
+            if G == []:
+                print("G Matrisi Boş. Kaydedilecek Birşey Yok...")
+                input("Geri Dönmek İçin 'enter'a Basınız...\n")
+            else:
+                WriteGraphToFile(G, fileName)
+        elif selection == "4":
             startNode = int(input("Başlangıç Noktasını Giriniz...\n"))
             endNode = int(input("Bitiş Noktasını Giriniz...\n"))
             #G = ReadGraphFromFile("gr1.txt")
             FindWay(G,startNode,endNode)
             input("Geri Dönmek İçin 'enter'a Basınız...\n")
-        elif selection == "4":
+        elif selection == "5":
             pass
         elif selection == "0":
             print("Hoşçakal")
