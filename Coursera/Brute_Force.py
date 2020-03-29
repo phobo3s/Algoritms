@@ -7,8 +7,8 @@ import time
 def ReadGraphFromFile(name):
     workingDir = os.getcwd() + "\\"   
     try:
-        size = 0
-        file = open(workingDir + name, "r") 
+        file = open(workingDir + name, "r")
+        size = 0 
         connections = file.readlines()
         for i in range(len(connections)):
             connections[i] = connections[i].replace("\n","").split(" ")
@@ -32,9 +32,10 @@ def ReadGraphFromFile(name):
             G[i[0]][i[1]] = 1
         input("Yükleme Tamamlandı 'enter'a Basınız...\n")
         return G
-    except FileExistsError:
+    except FileNotFoundError:
         print("Graph Dosyası Bulunamadı ... ")
         input("Geri Dönmek İçin 'enter'a Basınız...\n")
+        return []
 
 def WriteGraphToFile(G,name):
     workingDir = os.getcwd() + "\\"   
